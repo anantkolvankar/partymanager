@@ -2,15 +2,18 @@
   <div class="row">
     <h3>Users</h3>
     <div class="column">
-      <table class="table">
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <%= render user %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= form_tag(update_invites_users_path) do |f| %>
+        <table class="table">
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <%= render user %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= submit_tag 'Invite' %>
+      <% end %>
     </div>
   </div>
 </div>

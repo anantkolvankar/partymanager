@@ -16,12 +16,14 @@ gem 'rails_admin'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer', :platform=>:ruby
+gem 'bootstrap-datepicker-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
+  gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false

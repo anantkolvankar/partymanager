@@ -1,4 +1,4 @@
-Partyapp
+Partymanager
 ================
 
 Rails Composer, open source, supported by subscribers.
@@ -50,7 +50,7 @@ choose  Enter your selection: []
 option  Set a robots.txt file to ban spiders?
 choose  Enter your selection: []
 option  Create a GitHub repository? (y/n)
-choose  Enter your selection: []
+choose  Enter your selection: [true]
 option  Add gem and file for environment variables?
 choose  Enter your selection: []
 option  Reduce assets logger noise during development?

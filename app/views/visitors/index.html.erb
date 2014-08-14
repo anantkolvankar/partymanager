@@ -1,2 +1,24 @@
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+<% if @birthday_person.present? %>
+  <p>Today is your birthday!!!</p>
+<% end %>
+<% if @my_invites %>
+  <% @my_invites.each do |invite| %>
+    <p>
+      You got an invitation from <i><%= invite.birthday.name %></i>
+    </p>
+    <% if invite.is_contributed? %>
+      <p>Do you want to revert your <%= link_to "Contribute",revert_contribution_path(:bid=> invite.bid),method: :post %></p>
+    <% else %>
+    <p>Would you like to  <%= link_to "Contribute",add_contribution_path(:bid=> invite.bid),method: :post %> </p>
+    <p>
+    <p>
+      Tell what you want to have for party
+    </p>
+    <%= form_tag(add_order_path) do |f| %>
+      <%= options_for_select(@products, @products.map{|c| [c.name]}) %>
+      <%= collection_select(:product_id, 0, @products, :id, :name) %>
+    <% end %>
+      <%#= link_to "Tell what you want to have for party",add_contribution_path(:bid=> invite.bid),method: :post %> </p>
+    <% end %>
+  <% end %>
+<% end %>
