@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   scope :invite_members, -> (user_id) { where('id !=?',user_id) }
-  scope :has_birthday, -> (date) { where('dob =?',date) }
+  scope :has_birthday, -> (date,user_id) { where('dob =? and id=?',date,user_id) }
 end

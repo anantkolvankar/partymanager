@@ -15,9 +15,9 @@ class UsersController < ApplicationController
   def update_invites
     invite_ids = params[:invitee_ids]
     invite_ids.each do |invite|
-      Party.create(bid: current_user.id,invitee_id: invite)
+      Party.find_or_create_by(bid: current_user.id,invitee_id: invite)
     end
-    render text: params[:invitee_ids]
+    redirect_to users_path,notice: 'You have invited users successfully.'
   end
 
 end
