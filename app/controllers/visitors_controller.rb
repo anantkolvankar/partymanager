@@ -1,5 +1,5 @@
 class VisitorsController < ApplicationController
-
+before_filter :authenticate_user!
   def index
     @birthday_person = User.has_birthday Date.today
     @my_invites = Party.has_invited current_user.id
