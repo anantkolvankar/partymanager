@@ -19,5 +19,5 @@ class UsersController < ApplicationController
     end
     redirect_to users_path,notice: 'You have invited users successfully.'
   end
-
+  
 end

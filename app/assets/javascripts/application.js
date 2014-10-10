@@ -17,6 +17,6 @@
 //= require bootstrap-datepicker
 //= require_tree .
 
- $(document).ready(function(){
+ $(document).on('ready page:load',function() {
     $('.datepicker').datepicker();
   })
