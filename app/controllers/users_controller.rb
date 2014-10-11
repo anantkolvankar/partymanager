@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     invite_ids = params[:invitee_ids]
     invite_ids.each do |invite|
       Party.find_or_create_by(bid: current_user.id,invitee_id: invite)
+      # binding.pry
     end
     redirect_to users_path,notice: 'You have invited users successfully.'
   end

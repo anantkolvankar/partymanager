@@ -1,0 +1,60 @@
+#party.cards.col-md-4
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title Throw party
+    .panel-body
+      = render 'parties/form'
+
+#invitations.cards.col-md-4
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title Invitations
+    .panel-body
+      - if @my_invites
+        - @my_invites.each do |invite|
+          .well.well-lg
+            p
+              | You got an invitation from
+              i= invite.birthday.name
+            - if invite.is_contributed?
+              p
+                | Do you want to revert your #{link_to "Contribute",revert_contribution_path(:bid=> invite.bid),method: :post}
+            - else
+              p
+                | Would you like to  #{link_to "Contribute",add_contribution_path(:bid=> invite.bid),method: :post}
+              p
+                | Tell what you want to have for party
+              = form_tag(add_order_path,class: 'form-horizontal') do |f|
+                = hidden_field_tag 'birthday_id', invite.birthday.id
+                = hidden_field_tag 'invite_id', invite.id
+                .form-group.col-sm-4
+                  = select_tag "product_id", options_from_collection_for_select(@products, "id", "name",invite.product_id), class: 'form-control product_id',id: invite.id
+                .row
+                .form-group.col-sm-4
+                  = text_field_tag 'extra', invite.extra, class: "form-control #{invite.is_pizza_product? ? 'hidden' : ''}", id: "extra-#{invite.id}",placeholder: 'Specify your dish'
+                .row
+                .form-group
+                  = submit_tag 'sumbit',class: 'btn btn-primary'
+
+#notifications.cards.col-md-4
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title Invitations
+    .panel-body
+      /- if current_user.birthday?
+      p Today is your birthday!!!
+
+javascript:
+  $(document).ready(function() {
+    
+    $('.product_id').click(function() {
+      var product = $(this).find(":selected").text();
+      if (product != 'Pizza'){
+        $('#extra-'+$(this).attr('id')).show();
+        $('#extra-'+$(this).attr('id')).removeClass('hidden')
+      }
+      else{
+        $('#extra-'+$(this).attr('id')).hide()
+      }
+    });
+  });

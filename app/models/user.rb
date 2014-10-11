@@ -4,6 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  scope :invite_members, -> (user_id) { where('id !=?',user_id) }
-  scope :has_birthday, -> (date,user_id) { where('dob =? and id=?',date,user_id) }
+  has_many :parties
+  has_many :users_parties, through: :parties
+
+  scope :invite_members, -> (user_id) { where('id !=?', user_id) }
+  scope :has_birthday, -> (date,user_id) { where('dob =? and id=?', date, user_id) }
+
+  def birthday?
+    dob == Date.today
+  end
 end
