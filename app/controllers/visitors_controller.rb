@@ -16,17 +16,16 @@ before_filter :authenticate_user!
   end
 
   def add_order
-
     @party = Party.find(params[:invite_id])
-    @pizza_product = Product.where(name:'Pizza')
-    if params[:product_id].to_i == @pizza_product.first.id
+    @pizza_product = Product.find_by(name:'Pizza')
+    if params[:product_id].to_i == @pizza_product.id
       @party.update_attributes(product_id: params[:product_id], bid: params[:birthday_id],invitee_id: current_user[:id],extra: '')
-      redirect_to visitors_path,:notice=>'You have added your order successfully'
+      redirect_to visitors_path,:notice =>'You have added your order successfully'
     else
       if @party.update_attributes(product_id: params[:product_id], bid: params[:birthday_id],invitee_id: current_user[:id],extra: params[:extra])
-        redirect_to visitors_path,:notice=>'You have added your order successfully'
+        redirect_to visitors_path,:notice =>'You have added your order successfully'
       else
-        redirect_to visitors_path,:alert =>'Error updating your order'
+        redirect_to visitors_path,:alert =>"Error updating your order - #{@party.errors}"
       end
     end
   end
